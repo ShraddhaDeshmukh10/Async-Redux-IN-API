@@ -1,13 +1,17 @@
 class AppState {
   final List<Product> fetchProducts;
   final String url;
+  final bool isloading;
 
-  AppState({required this.url, required this.fetchProducts});
+  AppState(
+      {required this.url, required this.fetchProducts, this.isloading = false});
 
-  AppState copy({List<Product>? fetchProducts, String? url}) {
+  AppState copy({List<Product>? fetchProducts, String? url, bool? isloading}) {
     return AppState(
-        url: url ?? this.url,
-        fetchProducts: fetchProducts ?? this.fetchProducts);
+      url: url ?? this.url,
+      fetchProducts: fetchProducts ?? this.fetchProducts,
+      isloading: isloading ?? this.isloading,
+    );
   }
 
   static AppState initialState() =>

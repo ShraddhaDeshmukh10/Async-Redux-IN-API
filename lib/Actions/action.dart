@@ -11,17 +11,14 @@ class FetchItems extends ReduxAction<AppState> {
   @override
   Future<AppState> reduce() async {
     try {
-      //////state.fetchProducts;
+      await Future.delayed(Duration(seconds: 3));
       final response = await http.get(Uri.parse(url));
-
-      ///print(response.body);
-
       final responseBody = jsonDecode(response.body);
       if (responseBody is List) {
         List<Product> fetchedProducts = (responseBody as List)
             .map((item) => Product.fromJson(item))
             .toList();
-        return state.copy(fetchProducts: fetchedProducts);
+        return state.copy(fetchProducts: fetchedProducts, isloading: false);
       } else {
         throw Exception("Unexpected data format");
       }
@@ -29,5 +26,24 @@ class FetchItems extends ReduxAction<AppState> {
       print("Error occurred: $e");
       return state;
     }
+  }
+
+  @override
+  void before() {
+    dispatch(SetLoadingAction(true));
+  }
+
+  @override
+  void after() {
+    dispatch(SetLoadingAction(false));
+  }
+}
+
+class SetLoadingAction extends ReduxAction<AppState> {
+  final bool isloading;
+  SetLoadingAction(this.isloading);
+  @override
+  AppState reduce() {
+    return state.copy(isloading: isloading);
   }
 }
