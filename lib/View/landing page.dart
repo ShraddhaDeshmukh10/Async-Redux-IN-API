@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Actions/connector.dart';
+import 'package:flutter_application_1/View/connector.dart';
 
 class LandingPage extends StatelessWidget {
   final List fetchProducts;

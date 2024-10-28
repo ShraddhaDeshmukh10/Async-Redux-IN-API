@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Actions/connector.dart';
+import 'package:flutter_application_1/View/connector.dart';
 import 'package:flutter_application_1/appstate.dart';
 
 void main() {
